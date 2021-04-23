@@ -2,6 +2,7 @@ import json
 
 import requests
 
+"""Ссылка на расписание"""
 BASE_URL = "https://miet.ru/schedule"
 
 
