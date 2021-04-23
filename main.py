@@ -3,7 +3,7 @@ import json
 import requests
 
 BASE_URL = "https://miet.ru/schedule"
-
+# Мой первый коммит!
 
 def get_groups():
     group_page = requests.post(BASE_URL + "/groups", {})
