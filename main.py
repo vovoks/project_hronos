@@ -6,6 +6,10 @@ BASE_URL = "https://miet.ru/schedule"
 
 
 def get_groups():
+    """
+    Метод получения списка групп
+    :return:
+    """
     group_page = requests.post(BASE_URL + "/groups", {})
     if group_page.status_code == 200:
         return json.loads(group_page.text)
