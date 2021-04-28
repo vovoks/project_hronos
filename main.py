@@ -4,6 +4,8 @@ import requests
 import logging
 BASE_URL = "https://miet.ru/schedule"
 
+from time import sleep
+
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
 
@@ -42,12 +44,14 @@ def parse_schedule():
         [logging.error(x) for x in errors]
 
     for group in group_list[:3]:
+        sleep(0.3)
         logging.info("get_group: {}".format(group))
         schedule[group], errors = get_schedule(group)
         with open("schedules/{}.json".format(group), "w+", encoding='utf8') as f:
             f.write(json.dumps(schedule, ensure_ascii=False))
         if errors:
             [logging.error(x) for x in errors]
+
 
 if __name__ == '__main__':
     parse_schedule()
