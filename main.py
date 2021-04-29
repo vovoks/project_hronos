@@ -36,3 +36,5 @@ if __name__ == '__main__':
 
     with open("schedule.json", "w+", encoding='utf8') as f:
         f.write(json.dumps(schedule, ensure_ascii=False))
+
+
