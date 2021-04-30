@@ -29,3 +29,21 @@ class DisciplineAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Discipline, DisciplineAdmin)
+
+class WeekAlternationListAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(WeekAlternationList, WeekAlternationListAdmin)
+
+class ClassAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Class, ClassAdmin)
+
+class ScheduleAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Schedule, ScheduleAdmin)
