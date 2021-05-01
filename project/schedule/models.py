@@ -5,6 +5,13 @@ class Teacher(models.Model):
     teacher_full = models.CharField(verbose_name="ФИО полностью", max_length=255)
     teacher = models.CharField(verbose_name="ФИО", max_length=72)
 
+    def __str__(self):
+        return self.teacher
+
+    class Meta:
+        verbose_name = "Преподаватель"
+        verbose_name_plural = "Преподаватели"
+
 
 class Room(models.Model):
     code = models.IntegerField(verbose_name="Код")
