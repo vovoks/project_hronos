@@ -40,6 +40,16 @@ class Semestr(models.Model):
     date_start = models.DateField(verbose_name='Дата начала семестра')
     date_end = models.DateField(verbose_name='Дата начала семестра')
 
+    def __str__(self):
+        return "{}: {} - {}".format(self.name,
+                                    self.date_start.strftime("%d.%m.%y"),
+                                    self.date_end.strftime("%d.%m.%y"))
+
+    class Meta:
+        verbose_name = "Семетр"
+        verbose_name_plural = "Семестры"
+
+
 
 class WeekAlternationList(models.Model):
     # 1 - первый числитель, 2 - второй числитель, 3 - первый знаменатель, 4 - второй знаменатель
