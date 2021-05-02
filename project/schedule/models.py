@@ -51,3 +51,8 @@ class Schedule(models.Model):
     discipline = models.ForeignKey(Discipline, on_delete=models.DO_NOTHING, verbose_name="Дисциплина")
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING, verbose_name="Преподаватель")
     room = models.ForeignKey(Room, on_delete=models.DO_NOTHING, verbose_name="Аудитория")
+
+
+class FileUpload(models.Model):
+    file_name = models.CharField(max_lenght=72, verbose_name="Название файла")
+    file_hash = models.CharField(max_lenght=255, verbose_name="Хеш файла")
