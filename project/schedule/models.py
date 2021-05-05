@@ -19,6 +19,9 @@ class Group(models.Model):
 class Discipline(models.Model):
     code = models.CharField(verbose_name="Код", max_length=255)
     name = models.CharField(verbose_name="Название", max_length=255)
+    form = models.CharField(verbose_name="Форма проведения", max_length=255)
+
+
 
 
 class Class(models.Model):
@@ -42,11 +45,19 @@ class WeekAlternationList(models.Model):
     alternation_name_short = models.CharField(verbose_name="Короткое название", max_length=255)
 
 
+class Times(models.Model):
+    # {"Time": "1 пара", "Code": 1, "TimeFrom": "0001-01-01T09:00:00", "TimeTo": "0001-01-01T10:30:00"
+    time_name = models.CharField(max_length=72, verbose_name="Пара")
+    time_code = models.PositiveIntegerField(verbose_name="Код")
+    time_start = models.TimeField(verbose_name="Время начала")
+    time_end = models.TimeField(verbose_name="Время окончания")
+
+
 class Schedule(models.Model):
-    day = models.DateField(verbose_name='Дата')
+    day = models.IntegerField(verbose_name='Дата')
     alternation_week = models.ForeignKey(WeekAlternationList, on_delete=models.DO_NOTHING,
                                          verbose_name="Числитель/знаменатель")
-    class_time = models.ForeignKey(Class, on_delete=models.DO_NOTHING, verbose_name="Пара")
+    class_time = models.ForeignKey(Times, on_delete=models.DO_NOTHING, verbose_name="Пара")
     group = models.ForeignKey(Group, on_delete=models.DO_NOTHING, verbose_name="Группа")
     discipline = models.ForeignKey(Discipline, on_delete=models.DO_NOTHING, verbose_name="Дисциплина")
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING, verbose_name="Преподаватель")
@@ -54,5 +65,7 @@ class Schedule(models.Model):
 
 
 class FileUpload(models.Model):
-    file_name = models.CharField(max_lenght=72, verbose_name="Название файла")
-    file_hash = models.CharField(max_lenght=255, verbose_name="Хеш файла")
+    file_name = models.CharField(max_length=72, verbose_name="Название файла")
+    file_hash = models.CharField(max_length=255, verbose_name="Хеш файла")
+
+

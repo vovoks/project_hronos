@@ -5,26 +5,7 @@ from django.core.management.base import BaseCommand, CommandError
 from os import listdir
 from os.path import isfile, join
 from ...models import FileUpload
-
-
-def check_schedule_structure(parsed_json):
-    errors = []
-    pass
-
-
-def parse_schedule(json_file):
-    errors = []
-    success_output = []
-    try:
-        parsed_json = json.loads(json_file)
-        if check_schedule_structure(parsed_json):
-            pass
-
-    except Exception as e:
-        errors.append(e)
-
-    return success_output, errors
-
+from ...parser import parse_schedule
 
 
 class Command(BaseCommand):
@@ -49,10 +30,13 @@ class Command(BaseCommand):
             hash_list.remove((item.file_name, item.file_hash))
 
         for f in hash_list:
-            with open(join(base_path, f), "r+") as json_file:
+            with open(join(base_path, f[0]), "r+") as json_file:
                 success, error = parse_schedule(json_file.read())
 
                 if success:
+                    obj = FileUpload.objects.create(file_name=f[0], file_hash=f[1])
+                    obj.save()
+
                     for s in success:
                         self.stdout.write(self.style.SUCCESS(s))
 
