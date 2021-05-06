@@ -43,12 +43,12 @@ def parse_schedule():
     if errors:
         [logging.error(x) for x in errors]
 
-    for group in group_list[:3]:
+    for group in group_list[:4]:
         sleep(0.3)
         logging.info("get_group: {}".format(group))
         schedule[group], errors = get_schedule(group)
         with open("schedules/{}.json".format(group), "w+", encoding='utf8') as f:
-            f.write(json.dumps(schedule, ensure_ascii=False))
+            f.write(json.dumps(schedule[group], ensure_ascii=False))
         if errors:
             [logging.error(x) for x in errors]
 
