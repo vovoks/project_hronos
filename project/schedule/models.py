@@ -97,7 +97,7 @@ class Times(models.Model):
 
 
 class Schedule(models.Model):
-    day = models.IntegerField(verbose_name='Дата')
+    day = models.IntegerField(verbose_name='День недели')
     alternation_week = models.ForeignKey(WeekAlternationList, on_delete=models.DO_NOTHING,
                                          verbose_name="Числитель/знаменатель")
     class_time = models.ForeignKey(Times, on_delete=models.DO_NOTHING, verbose_name="Пара")
@@ -109,6 +109,14 @@ class Schedule(models.Model):
     class Meta:
         verbose_name = "Расписание"
         verbose_name_plural = "Расписания"
+
+    @property
+    def day_week(self):
+        return ["", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"][int(self.day)]
+
+    @property
+    def day_week_short(self):
+        return ["", " Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"][int(self.day)]
 
 
 class FileUpload(models.Model):

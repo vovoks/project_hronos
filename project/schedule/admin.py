@@ -39,7 +39,7 @@ admin.site.register(WeekAlternationList, WeekAlternationListAdmin)
 
 
 class ScheduleAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("group", "day_week", "alternation_week", "class_time", "discipline", "teacher", "room")
 
 
 admin.site.register(Schedule, ScheduleAdmin)
