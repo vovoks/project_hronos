@@ -5,6 +5,13 @@ class Teacher(models.Model):
     teacher_full = models.CharField(verbose_name="ФИО полностью", max_length=255)
     teacher = models.CharField(verbose_name="ФИО", max_length=72)
 
+    def __str__(self):
+        return self.teacher
+
+    class Meta:
+        verbose_name = "Преподаватель"
+        verbose_name_plural = "Преподаватели"
+
 
 class Room(models.Model):
     code = models.IntegerField(verbose_name="Код")
@@ -26,6 +33,16 @@ class Semestr(models.Model):
     name = models.CharField(verbose_name='Название семестра', max_length=255)
     date_start = models.DateField(verbose_name='Дата начала семестра')
     date_end = models.DateField(verbose_name='Дата начала семестра')
+
+    def __str__(self):
+        return "{}: {} - {}".format(self.name,
+                                    self.date_start.strftime("%d.%m.%y"),
+                                    self.date_end.strftime("%d.%m.%y"))
+
+    class Meta:
+        verbose_name = "Семетр"
+        verbose_name_plural = "Семестры"
+
 
 
 class WeekAlternationList(models.Model):
