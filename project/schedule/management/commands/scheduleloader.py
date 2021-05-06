@@ -22,7 +22,7 @@ class Command(BaseCommand):
             with open(join(base_path, f), "rb") as json_file:
                 for chunk in iter(lambda: json_file.read(4096), b""):
                     hash_md5.update(chunk)
-                    hash_list.append((f, hash_md5.hexdigest()))
+                hash_list.append((f, hash_md5.hexdigest()))
 
         obj = FileUpload.objects.filter(file_hash__in=[x[1] for x in hash_list])
 
@@ -30,7 +30,7 @@ class Command(BaseCommand):
             hash_list.remove((item.file_name, item.file_hash))
 
         for f in hash_list:
-            with open(join(base_path, f[0]), "r+") as json_file:
+            with open(join(base_path, f[0]), "r", encoding='utf-8') as json_file:
                 success, error = parse_schedule(json_file.read())
 
                 if success:
@@ -38,8 +38,8 @@ class Command(BaseCommand):
                     obj.save()
 
                     for s in success:
-                        self.stdout.write(self.style.SUCCESS(s))
+                        self.stdout.write(self.style.SUCCESS(str(s)))
 
                 if error:
                     for s in error:
-                        self.stdout.write(self.style.ERROR(s))
+                        self.stdout.write(self.style.ERROR(str(s)))

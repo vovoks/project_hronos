@@ -22,15 +22,6 @@ class Discipline(models.Model):
     form = models.CharField(verbose_name="Форма проведения", max_length=255)
 
 
-
-
-class Class(models.Model):
-    class_code = models.IntegerField(verbose_name='Код')
-    name = models.CharField(verbose_name='Название', max_length=255)
-    time_from = models.TimeField(verbose_name="Время начала")
-    time_to = models.TimeField(verbose_name="Время окончания")
-
-
 class Semestr(models.Model):
     name = models.CharField(verbose_name='Название семестра', max_length=255)
     date_start = models.DateField(verbose_name='Дата начала семестра')
@@ -39,7 +30,6 @@ class Semestr(models.Model):
 
 class WeekAlternationList(models.Model):
     # 1 - первый числитель, 2 - второй числитель, 3 - первый знаменатель, 4 - второй знаменатель
-    week_code = models.PositiveIntegerField(verbose_name="Номер недели")
     alternation_code = models.PositiveIntegerField(verbose_name="Числитель/Знаменатель")
     alternation_name = models.CharField(verbose_name="Название", max_length=255)
     alternation_name_short = models.CharField(verbose_name="Короткое название", max_length=255)
@@ -67,5 +57,3 @@ class Schedule(models.Model):
 class FileUpload(models.Model):
     file_name = models.CharField(max_length=72, verbose_name="Название файла")
     file_hash = models.CharField(max_length=255, verbose_name="Хеш файла")
-
-

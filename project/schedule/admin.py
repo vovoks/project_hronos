@@ -30,20 +30,30 @@ class DisciplineAdmin(admin.ModelAdmin):
 
 admin.site.register(Discipline, DisciplineAdmin)
 
+
 class WeekAlternationListAdmin(admin.ModelAdmin):
     pass
 
 
 admin.site.register(WeekAlternationList, WeekAlternationListAdmin)
 
-class ClassAdmin(admin.ModelAdmin):
-    pass
-
-
-admin.site.register(Class, ClassAdmin)
 
 class ScheduleAdmin(admin.ModelAdmin):
     pass
 
 
 admin.site.register(Schedule, ScheduleAdmin)
+
+
+class FileUploadAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(FileUpload, FileUploadAdmin)
+
+
+class TimesAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Times, TimesAdmin)

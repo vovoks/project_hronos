@@ -1,5 +1,5 @@
 import json
-from models import *
+from .models import *
 
 
 def check_schedule_structure(parsed_json):
@@ -10,12 +10,14 @@ def check_schedule_structure(parsed_json):
     for key_l1 in parsed_json.keys():
         if key_l1 in struct.keys():
             success.append(True)
-            if key_l1 in ["Times", "Data"] and parsed_json[key_l1].isinstance(list):
+            if key_l1 in ["Times", "Data"] and isinstance(parsed_json[key_l1], list):
                 success.append(True)
                 if list(parsed_json[key_l1][0].keys()).sort() == list(struct[key_l1][0].keys()).sort():
                     success.append(True)
                 else:
                     errors.append("Ошибка проверки структуры расписания: в ключе {} ожидается структура {}".format(key_l1, " ,".join(list(struct[key_l1][0].keys()))))
+            elif key_l1 == "Semestr":
+                pass
             else:
                 errors.append("Ошибка проверки структуры расписания: в ключе {} ожидается list".format(key_l1))
 
@@ -27,7 +29,7 @@ def check_schedule_structure(parsed_json):
 
 def parse_schedule(json_file):
     errors = []
-    success_output = []
+    success= []
     try:
         parsed_json = json.loads(json_file)
         success, errors = check_schedule_structure(parsed_json)
@@ -37,7 +39,7 @@ def parse_schedule(json_file):
                 day = item["Day"]
 
                 day_number = item["DayNumber"]
-                week_alt_obj = WeekAlternationList.objects.get(week_code=day_number)
+                week_alt_obj = WeekAlternationList.objects.get(alternation_code=day_number)
 
                 time_code = item["Time"]["Code"]
                 time_obj = Times.objects.get(time_code=time_code)
@@ -57,9 +59,9 @@ def parse_schedule(json_file):
 
                 group_code = item["Group"]["Code"]
                 group_name = item["Group"]["Name"]
-                group_obj, created = Room.objects.get_or_create(code=group_code, name=group_name)
+                group_obj, created = Group.objects.get_or_create(code=group_code, name=group_name)
 
-                schedule_obj, created = Schedule.objects_get_or_create(day=day,
+                schedule_obj, created = Schedule.objects.get_or_create(day=day,
                                                                        alternation_week=week_alt_obj,
                                                                        class_time=time_obj,
                                                                        group=group_obj,
@@ -67,7 +69,9 @@ def parse_schedule(json_file):
                                                                        teacher=teacher_obj,
                                                                        room=room_obj)
 
+            success.append("Раcписание группы {} успешно загружено".format(group_name))
+
     except Exception as e:
         errors.append(e)
 
-    return errors
+    return success, errors
