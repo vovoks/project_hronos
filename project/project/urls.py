@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from schedule.api import ScheduleList
+from schedule.api import ScheduleList, LoadScheduleFromSite
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/schedule', ScheduleList.as_view())
+    path('api/schedule', ScheduleList.as_view()),
+    path('api/schedule/load/<str:group>', LoadScheduleFromSite.as_view())
+
 
 ]
