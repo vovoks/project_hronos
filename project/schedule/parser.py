@@ -27,7 +27,7 @@ def check_schedule_structure(parsed_json):
 
 def parse_schedule(json_file):
     errors = []
-    success= []
+    success = []
     try:
         parsed_json = json.loads(json_file)
         success, errors = check_schedule_structure(parsed_json)

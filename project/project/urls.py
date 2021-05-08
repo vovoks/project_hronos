@@ -16,18 +16,19 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_swagger.views import get_swagger_view
 
 from schedule.api import ScheduleList, LoadScheduleFromSite
 
-schema_view = get_swagger_view(title='Snippets API')
+schema_view = get_swagger_view(title='Schedule API')
 
 urlpatterns = [
     url('^$', schema_view),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/schedule', ScheduleList.as_view()),
-    path('api/schedule/load/<str:group>', LoadScheduleFromSite.as_view())
-
-
+    path('api/schedule/load/<str:group>', LoadScheduleFromSite.as_view()),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
