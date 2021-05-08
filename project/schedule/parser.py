@@ -9,11 +9,9 @@ def check_schedule_structure(parsed_json):
 
     for key_l1 in parsed_json.keys():
         if key_l1 in struct.keys():
-            success.append(True)
             if key_l1 in ["Times", "Data"] and isinstance(parsed_json[key_l1], list):
-                success.append(True)
                 if list(parsed_json[key_l1][0].keys()).sort() == list(struct[key_l1][0].keys()).sort():
-                    success.append(True)
+                    success.append("Структура расписания распознана")
                 else:
                     errors.append("Ошибка проверки структуры расписания: в ключе {} ожидается структура {}".format(key_l1, " ,".join(list(struct[key_l1][0].keys()))))
             elif key_l1 == "Semestr":
