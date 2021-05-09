@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+class RegisterServiceView(TemplateView):
+    template_name = "schedule/register_service.html"

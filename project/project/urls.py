@@ -21,6 +21,8 @@ from rest_framework_swagger.views import get_swagger_view
 
 from schedule.api import ScheduleList, LoadScheduleFromSite
 
+from schedule.views import RegisterServiceView
+
 schema_view = get_swagger_view(title='Schedule API')
 
 urlpatterns = [
@@ -31,4 +33,5 @@ urlpatterns = [
     path('api/schedule/load/<str:group>', LoadScheduleFromSite.as_view()),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('register-service', RegisterServiceView.as_view(), name='register_service')
 ]
