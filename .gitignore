@@ -2,3 +2,4 @@
 venv
 .idea
 migrations
+secrets.py

@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os.path
 
 from pathlib import Path
 
@@ -140,3 +141,10 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
+
+
+if os.path.isfile('./project/secrets.py'):
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    from .secrets import *
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'

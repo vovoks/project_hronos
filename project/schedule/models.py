@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -129,3 +130,9 @@ class FileUpload(models.Model):
     class Meta:
         verbose_name = "Файл"
         verbose_name_plural = "Файлы"
+
+
+class RegisterService(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Имя пользователя')
+    service_name = models.CharField(max_length=72, verbose_name='Название сервиса')
+    service_desc = models.TextField(verbose_name='Описание сервиса')
