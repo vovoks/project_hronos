@@ -11,7 +11,8 @@ from .parser import check_schedule_structure, parse_schedule
 
 class ScheduleList(APIView):
     #authentication_classes = [authentication.BasicAuthentication]
-    permission_classes = [permissions.AllowAny]
+    #permission_classes = [permissions.AllowAny]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get(self, request, format=None):
         schedules = [schedule.day for schedule in Schedule.objects.all()]
@@ -20,7 +21,8 @@ class ScheduleList(APIView):
 
 class LoadScheduleFromSite(APIView):
     #authentication_classes = [authentication.BasicAuthentication]
-    permission_classes = [permissions.AllowAny]
+    #permission_classes = [permissions.AllowAny]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get(self, request, group, format=None):
         errors = []
