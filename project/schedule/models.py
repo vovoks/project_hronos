@@ -117,7 +117,39 @@ class Schedule(models.Model):
 
     @property
     def day_week_short(self):
-        return ["", " Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"][int(self.day)]
+        return ["", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"][int(self.day)]
+
+    @property
+    def alt_week_short(self):
+        return self.alternation_week.alternation_name_short
+
+    @property
+    def class_time_num(self):
+        return self.class_time.time_name
+
+    @property
+    def class_time_start(self):
+        return self.class_time.time_start.strftime("%H:%M")
+
+    @property
+    def class_time_end(self):
+        return self.class_time.time_end.strftime("%H:%M")
+
+    @property
+    def group_name(self):
+        return self.group.name
+
+    @property
+    def discipline_name(self):
+        return self.discipline.name
+
+    @property
+    def teacher_name(self):
+        return self.teacher.teacher
+
+    @property
+    def room_name(self):
+        return self.room.name
 
 
 class FileUpload(models.Model):

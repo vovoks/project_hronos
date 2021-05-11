@@ -1,22 +1,29 @@
 import json
 
+from django.http import JsonResponse
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import authentication, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 
 from .loader import get_schedule
 from .models import Schedule, Group
 from .parser import check_schedule_structure, parse_schedule
+from .serializers import ScheduleSerializer
 
 
-class ScheduleList(APIView):
+class ScheduleList(ModelViewSet):
     #authentication_classes = [authentication.BasicAuthentication]
     #permission_classes = [permissions.AllowAny]
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Schedule.objects.all()
+    serializer_class = ScheduleSerializer
+    filter_backends = [DjangoFilterBackend]
+    filter_fields = ['group__name']
 
-    def get(self, request, format=None):
-        schedules = [schedule.day for schedule in Schedule.objects.all()]
-        return Response(schedules)
+    def list(self, request, *args, **kwargs):
+        return JsonResponse(self.get_serializer().data, safe=False)
 
 
 class LoadScheduleFromSite(APIView):
