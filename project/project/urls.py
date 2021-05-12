@@ -19,6 +19,7 @@ from django.urls import path, include
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
+from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_swagger.views import get_swagger_view
 
@@ -39,15 +40,19 @@ schema_view = get_schema_view(
    permission_classes=[permissions.AllowAny],
 )
 
+# router = DefaultRouter()
+# router.register(r'/api/schedule', ScheduleList, basename='schedule')
+
 urlpatterns = [
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/schedule', ScheduleList.as_view({'get': 'list'})),
+    path('api/schedule', ScheduleList.as_view()),
     path('api/schedule/load/<str:group>', LoadScheduleFromSite.as_view()),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register-service', RegisterServiceView.as_view(), name='register_service')
 ]
+
