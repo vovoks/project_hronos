@@ -71,20 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'schedule',
-        'USER': 'schedule',
-        'PASSWORD': 'schedule',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -137,9 +123,34 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
+# Database
+# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+
+
+POSTGRES_BACKEND = {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': 'schedule',
+    'USER': 'schedule',
+    'PASSWORD': 'schedule',
+    'HOST': 'localhost',
+    'PORT': '5432',
+}
+
+SQLITE_BACKEND = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'schedule',
+    }
+
+
 if os.path.isfile('./project/secrets.py'):
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    from .secrets import *
+    if DATABASE_BACKEND == "sqlite3":
+        DATABASES = {"default": SQLITE_BACKEND}
+    elif DATABASE_BACKEND == "postgresql_psycopg2":
+        DATABASES = {"default": POSTGRES_BACKEND}
+
 else:
+    DATABASES = {"default": SQLITE_BACKEND}
     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 SWAGGER_SETTINGS = {
