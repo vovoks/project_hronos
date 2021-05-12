@@ -1,4 +1,4 @@
-DATABASE_BACKEND = "postgresql_psycopg2"  # sqlite3 or postgresql_psycopg2
+DATABASE_BACKEND = "sqlite3"  # sqlite3 or postgresql_psycopg2
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
