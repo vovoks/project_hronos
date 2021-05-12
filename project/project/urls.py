@@ -19,9 +19,7 @@ from django.urls import path, include
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
-from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from rest_framework_swagger.views import get_swagger_view
 
 from schedule.api import ScheduleList, LoadScheduleFromSite
 

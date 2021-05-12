@@ -18,7 +18,7 @@ class ScheduleList(generics.ListAPIView):
     queryset = Schedule.objects.all()
     serializer_class = ScheduleSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['group__name', 'day']
+    filterset_fields = ['group__name', 'day', 'teacher__teacher']
 
     # def list(self, request, *args, **kwargs):
     #     return JsonResponse(self.get_serializer().data, safe=False)
