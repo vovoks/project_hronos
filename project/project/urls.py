@@ -25,6 +25,8 @@ from schedule.api import ScheduleList, LoadScheduleFromSite
 
 from schedule.views import RegisterServiceView
 
+from schedule.views import IndexView
+
 schema_view = get_schema_view(
    openapi.Info(
       title="Schedule API",
@@ -51,6 +53,8 @@ urlpatterns = [
     path('api/schedule/load/<str:group>', LoadScheduleFromSite.as_view()),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('register-service', RegisterServiceView.as_view(), name='register_service')
+    path('register-service', RegisterServiceView.as_view(), name='register_service'),
+    path('', IndexView.as_view(), name='index')
+
 ]
 

@@ -13,3 +13,7 @@ class RegisterServiceView(SuccessMessageMixin, FormView):
     def form_valid(self, form):
         form.send_email(form)
         return super().form_valid(form)
+
+
+class IndexView(TemplateView):
+    template_name = "schedule/index.html"

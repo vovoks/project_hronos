@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru" class="h-100">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="theme-color" content="#7952b3">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'img/img.png' %}" alt="" width="200" height="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    {#                    <li class="nav-item">#}
+                    {#                        <a class="nav-link active" aria-current="page" href="#">Главная</a>#}
+                    {#                    </li>#}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="flex-shrink-0">
+    <div class="container">
+        <h3>Добро пожаловать в проект Хронос!</h3>
+        <p class="lead">Хронос - предоставляет REST-API интерфейс для внешних сервисов в целью упрощения работы с
+            расписанием МИЭТа.
+        </p>
+        <div class="container">
+            <h4>REST-API сервис расписания</h4>
+            <div class="container">
+                <ol>
+                    <li>
+                        Для начала работы Вам потребуется зарегистрировать собственный сервис по <a
+                            href="{% url 'register_service' %}">ссылке</a>.
+                        После регистрации Вам придет сообщение на электронную почту с реквизитами для подключения к
+                        сервису.
+                    </li>
+                    <li>
+                        Для проверки реквизитов и получения информации о составе медотов API можно перейти по <a
+                            href="{% url "schema-swagger-ui" %}" target="_blank">ссылке</a>.
+                        <ul>
+                            <li>Чтобы выполнять запросы к сервису потребуется получить access-token. Для этого, через
+                                метод <b>/token</b> передайте (кнопка "Try it out"), полученные username и password и
+                                нажимте Execute. В ответ Вам должен вернуться access_token.
+                            </li>
+                            <li>Скопируйте значение access_token и нажмите кнопку Authorize и поле value введите Bearer
+                                "скопированный acess_token", далее нажмите кнопку Authorize. Теперь все запросы на этой
+                                странице будут выполняться с указанным access_token.
+                            </li>
+                            <li>Выполните метод <b>/schedule</b>, чтобы убедиться, что сервис работает. В ответ в случае
+                                успеха должно вернуться расписание.
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <span class="text-muted">Наш <a href="https://github.com/vovoks/project_hronos">GitHub</a>.</span>
+    </div>
+</footer>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
