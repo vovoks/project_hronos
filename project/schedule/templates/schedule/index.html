@@ -9,20 +9,6 @@
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <meta charset="UTF-8">
     <title></title>
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
     </style>
 </head>
 <body class="d-flex flex-column h-100">
@@ -31,7 +17,7 @@
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="{% static 'img/img.png' %}" alt="" width="200" height="">
+                <img src="{% static 'img/img.png' %}" alt="" width="200" height=""><span class="text-danger">Beta!</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,6 +68,8 @@
                     </li>
                 </ol>
             </div>
+            <h4>Расписание в формате ICS (для импорта в календари) - <span class="text-danger">Скоро!</span></h4>
+            <h4>Расписание в формате CSV (для исследований) - <span class="text-danger">Скоро!</span></h4>
         </div>
     </div>
 </main>
