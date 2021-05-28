@@ -17,6 +17,11 @@ class ScheduleList(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['group__name', 'day', 'teacher__teacher', 'discipline__code', 'teacher__teacher', 'room__name']
 
+    def get(self, request, *args, **kwargs):
+        if "group__name" not in request.query_params.keys():
+            return Response({"error": "Параметр названия группы (group__name) обязателен!"})
+        return super().get(request, *args, **kwargs)
+
 
 class LoadScheduleFromSite(APIView):
     def get(self, request, group):
