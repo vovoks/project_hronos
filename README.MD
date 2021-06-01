@@ -1,5 +1,7 @@
 # Инструкция по организации стенда разработки
 
+[![Join the chat at https://gitter.im/project_hronos/community](https://badges.gitter.im/project_hronos/community.svg)](https://gitter.im/project_hronos/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 1. Установить python 3.8.* для своей платформы([python.org](https://www.python.org/downloads/)]).
 1. Открыть терминал и выполнить команду:
     ```shell
