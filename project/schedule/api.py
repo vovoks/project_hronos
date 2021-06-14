@@ -24,6 +24,7 @@ class ScheduleList(generics.ListAPIView):
 
 
 class LoadScheduleFromSite(APIView):
+    swagger_schema = None
     def get(self, request, group):
         errors = []
         success = []

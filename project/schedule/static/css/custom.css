@@ -1,3 +1,28 @@
+  @font-face {
+    font-family: "Computer Modern";
+    src: url('/static/fonts/cmunss.otf');
+  }
+  @font-face {
+    font-family: "Computer Modern";
+    src: url('/static/fonts/cmunsx.otf');
+    font-weight: bold;
+  }
+  @font-face {
+    font-family: "Computer Modern";
+    src: url('/static/fonts/cmunsi.otf');
+    font-style: italic, oblique;
+  }
+  @font-face {
+    font-family: "Computer Modern";
+    src: url('/static/fonts/cmunbxo.otf');
+    font-weight: bold;
+    font-style: italic, oblique;
+  }
+
+  body {
+      font-family: "Computer Modern", sans-serif;
+  }
+
 main > .container {
     padding: 100px 15px 0;
 }
