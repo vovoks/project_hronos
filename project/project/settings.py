@@ -139,7 +139,7 @@ SQLITE_BACKEND = {
     }
 
 
-if os.path.isfile('./project/secrets.py'):
+if os.path.isfile(os.path.join('.', 'project', 'secrets.py')):
     from .secrets import *
     if DATABASE_BACKEND == "sqlite3":
         DATABASES = {"default": SQLITE_BACKEND}
