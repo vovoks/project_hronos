@@ -138,15 +138,14 @@ SQLITE_BACKEND = {
         'NAME': 'schedule',
     }
 
-
-if os.path.isfile(os.path.join('.', 'project', 'secrets.py')):
+try:
     from .secrets import *
     if DATABASE_BACKEND == "sqlite3":
         DATABASES = {"default": SQLITE_BACKEND}
     elif DATABASE_BACKEND == "postgresql_psycopg2":
         DATABASES = {"default": POSTGRES_BACKEND}
 
-else:
+except:
     DATABASES = {"default": SQLITE_BACKEND}
     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
@@ -165,7 +164,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 from datetime import timedelta
 
-...
+SECRET_KEY = ""
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
