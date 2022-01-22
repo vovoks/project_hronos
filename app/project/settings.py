@@ -133,21 +133,7 @@ POSTGRES_BACKEND = {
     'PORT': '5432',
 }
 
-SQLITE_BACKEND = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'schedule',
-    }
-
-try:
-    from .secrets import *
-    if DATABASE_BACKEND == "sqlite3":
-        DATABASES = {"default": SQLITE_BACKEND}
-    elif DATABASE_BACKEND == "postgresql_psycopg2":
-        DATABASES = {"default": POSTGRES_BACKEND}
-
-except:
-    DATABASES = {"default": SQLITE_BACKEND}
-    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+DATABASES = {"default": POSTGRES_BACKEND}
 
 SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,
@@ -172,7 +158,7 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
+    'SIGNING_KEY': os.getenv('SECRET_KEY', "test"),
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,
