@@ -6,6 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the stack
-        run: docker-compose up -d
+        run: docker-compose up -d -f docker-compose.prod.yml
       - name: Test
-        run: docker run --network container:django-webapp appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8000/
+        run: docker run --network container:django-webapp appropriate/curl -s --retry 10 --retry-connrefused http://localhost/
