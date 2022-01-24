@@ -1,18 +1,11 @@
-name: Docker Image CI
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+name: docker-compose-actions-workflow
+on: push
 jobs:
-
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file ./app/Dockerfile.prod --tag project-hronos:$(date +%s)
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run: docker-compose up -d
+      - name: Test
+        run: docker run --network container:django-webapp appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8000/
