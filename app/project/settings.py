@@ -20,9 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.getenv('DEBUG_MODE', 'False'))
 
-ALLOWED_HOSTS = ['hronos.vov.su', '127.0.0.1']
+ALLOWED_HOSTS = [os.getenv('HOST_ADDRESS', '127.0.0.1')]
 
 # Application definition
 
@@ -126,9 +126,9 @@ REST_FRAMEWORK = {
 
 POSTGRES_BACKEND = {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'schedule',
-    'USER': 'schedule',
-    'PASSWORD': 'schedule',
+    'NAME': os.getenv('POSTGRES_PASSWORD', 'schedule'),
+    'USER': os.getenv('POSTGRES_USER', 'schedule'),
+    'PASSWORD': os.getenv('POSTGRES_DB', 'schedule'),
     'HOST': 'localhost',
     'PORT': '5432',
 }
