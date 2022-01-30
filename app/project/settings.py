@@ -24,6 +24,8 @@ DEBUG = bool(os.getenv('DEBUG_MODE', 'False'))
 
 ALLOWED_HOSTS = [os.getenv('HOST_ADDRESS', '127.0.0.1')]
 
+SECRET_KEY = [os.getenv('SECRET_KEY', 'abcdef1234567890')]
+
 # Application definition
 
 INSTALLED_APPS = [
